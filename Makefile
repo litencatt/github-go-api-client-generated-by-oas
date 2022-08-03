@@ -1,4 +1,8 @@
 GENERATOR_VERSION=v6.0.1
+
+download-spec:
+	wget -P spec https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.yaml
+
 openapi-generate-client:
 	rm -rf client/github-go/*.go client/github-go/docs/*.md
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:$(GENERATOR_VERSION) generate -i /local/spec/api.github.com.yaml -g go -p packageVersion=0.0.1 -p packageName=github -o /local/client/github-go
